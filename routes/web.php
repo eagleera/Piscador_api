@@ -24,3 +24,5 @@ Route::get('/workers', ['as'=> 'index workers', 'uses'=>'WorkersController@index
 Route::post('/worker', ['as'=> 'create new worker', 'uses'=>'WorkersController@store']);
 Route::patch('/worker/{id}', ['as'=> 'update a worker', 'uses'=>'WorkersController@edit']);
 Route::delete('/worker/{id}', ['as'=> 'delete a worker', 'uses'=>'WorkersController@delete']);
+//ATTENDANCE
+Route::get('/attendance/{init_date}/{end_date}', ['as'=> 'get attendance between two dates', 'uses'=>'AttendanceController@indexRange']);
