@@ -26,3 +26,4 @@ Route::patch('/worker/{id}', ['as'=> 'update a worker', 'uses'=>'WorkersControll
 Route::delete('/worker/{id}', ['as'=> 'delete a worker', 'uses'=>'WorkersController@delete']);
 //ATTENDANCE
 Route::get('/attendance/{init_date}/{end_date}', ['as'=> 'get attendance between two dates', 'uses'=>'AttendanceController@indexRange']);
+Route::post('/attendance', ['as'=> 'get attendance between two dates', 'uses'=>'AttendanceController@store']);
