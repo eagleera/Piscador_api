@@ -9,4 +9,11 @@ class Role extends Model {
         'cantidad',
         'tipo_id'
     ];
+
+    public function tipo() {
+        return $this->belongsTo('App\Http\Models\TiposPaga');
+    }
+    public function addTipo() {
+        $this->tipo = $this->tipo()->first();
+    }
 }

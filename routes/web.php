@@ -1,5 +1,8 @@
 <?php
 
+header('Access-Control-Allow-Origin:  *');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,6 +17,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+//TIPOS
+Route::get('/tipos', ['as'=> 'index roles', 'uses'=>'RolesController@indexTipos']);
 //ROLES
 Route::get('/roles', ['as'=> 'index roles', 'uses'=>'RolesController@index']);
 Route::post('/rol', ['as'=> 'create new rol', 'uses'=>'RolesController@store']);

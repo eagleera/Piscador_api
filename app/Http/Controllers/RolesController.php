@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Role;
+use App\Http\Models\TiposPaga;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -19,7 +20,14 @@ class RolesController extends Controller
 
     public function index()
     {
-        return Role::all();
+        $roles = Role::all();
+        foreach($roles as $role) {
+            $role->addTipo();
+        }
+        return $roles;
+    }
+    public function indexTipos() {
+        return TiposPaga::all();
     }
 
     public function store(Request $request)
