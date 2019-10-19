@@ -9,4 +9,11 @@ class Attendance extends Model {
         'attendance_day',
         'status'
     ];
+
+    public function worker() {
+        return $this->belongsTo('App\Http\Models\Worker');
+    }
+    public function addWorker() {
+        $this->worker = $this->worker()->first();
+    }
 }

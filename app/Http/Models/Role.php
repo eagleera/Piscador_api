@@ -13,6 +13,7 @@ class Role extends Model {
     public function tipo() {
         return $this->belongsTo('App\Http\Models\TiposPaga');
     }
+    
     public function addTipo() {
         $this->tipo = $this->tipo()->first();
     }

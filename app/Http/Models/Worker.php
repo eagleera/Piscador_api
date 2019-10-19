@@ -9,4 +9,12 @@ class Worker extends Model {
         'nombre',
         'rol_id'
     ];
+
+    public function role() {
+        return $this->belongsTo('App\Http\Models\Role', 'rol_id', 'id');
+    }
+
+    public function addRole() {
+        $this->role = $this->role()->first();
+    }
 }

@@ -18,25 +18,49 @@ class AttendanceController extends Controller
         //
     }
 
-    public function indexRange($init_date, $end_date)
+    public function index(Request $request)
     {
-        return Attendance::whereBetween('attendance_day',[$init_date, $end_date])->get();
+        $date = $request->input('date');
+        $date = str_replace('/', '-', $date);
+        $date = date('Y-m-d', strtotime($date));
+        $attendance =  Attendance::where('attendance_day', $date)->get();
+        foreach($attendance as $att) {
+            $att->addWorker();
+            $att->status = boolval($att->status);
+        }
+        return $attendance;
+    }
+
+    public function indexRange(Request $request)
+    {
+        $init_date = $request->input('init_date');
+        $init_date = str_replace('/', '-', $init_date);
+        $init_date = date('Y-m-d', strtotime($init_date));
+        $end_date = $request->input('end_date');
+        $end_date = str_replace('/', '-', $end_date);
+        $end_date = date('Y-m-d', strtotime($end_date));
+        $attendance = Attendance::whereBetween('attendance_day',[$init_date, $end_date])->get();
+        foreach($attendance as $att) {
+            $att->addWorker();
+            $att->worker->addRole();
+            $att->worker->role->addTipo();
+        }
+        return $attendance;
     }
 
     public function store(Request $request)
     {
-        $workers_id = $request->input('attendance');
+        $workers = $request->input('workers');
         $date = $request->input('date');
-        $workers = Workers::all();
+        $date = date('Y-m-d', strtotime($date));
         foreach($workers as $worker){
             $attendance = new Attendance;
-            $attendance->worker_id = $worker->id; 
-            $attendance->status = 1;
-            $attendance->date = $date;
-            if(in_array($worker->id, $workers_id)){
-                $attendance->status = 0;
-            }
+            $attendance->worker_id = $worker['id']; 
+            $attendance->status = $worker['attendance'];
+            $attendance->attendance_day = $date;
+            $attendance->save();
         }
+        return response()->json(['status' => 'registered']);
     }
 
     public function edit(Request $request, $id) {
