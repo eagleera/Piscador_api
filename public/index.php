@@ -22,9 +22,9 @@ $app = require __DIR__ . '/../bootstrap/app.php';
 |
 */
 $allowedOrigins = array(
-   '(http(s)://)?(www\.)?api.piscador', // Laravel API Domain
-   'http://localhost:8080' // VueJS CLient
-   ); 
+   '(http(s)://)?(www\.)?piscador-api.herokuapp.com', // Laravel API Domain
+   'https://pizcador.com/' // VueJS CLient
+   );
 if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] != '') {
    foreach ($allowedOrigins as $allowedOrigin) {
       if (preg_match('#' . $allowedOrigin . '#', $_SERVER['HTTP_ORIGIN'])) {
