@@ -53,11 +53,10 @@ class AttendanceController extends Controller
         $workers = $request->input('workers');
         $date = $request->input('date');
         $date = date('Y-m-d', strtotime($date));
-        dd($date, $workers);
         foreach($workers as $worker){
             $attendance = new Attendance;
             $attendance->worker_id = $worker['id']; 
-            $attendance->status = $worker['attendance'];
+            $attendance->status = strtoupper($worker['attendance']);
             $attendance->attendance_day = $date;
             $attendance->save();
         }
