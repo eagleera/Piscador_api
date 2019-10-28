@@ -56,9 +56,8 @@ class AttendanceController extends Controller
         foreach($workers as $worker){
             $attendance = new Attendance;
             $attendance->worker_id = $worker['id']; 
-            $attendance->status = strtoupper($worker['attendance']);
+            $attendance->status = $worker['attendance'];
             $attendance->attendance_day = $date;
-            dd("Aqui truena", $attendance);
             $attendance->save();
         }
         return response()->json(['status' => 'registered']);
