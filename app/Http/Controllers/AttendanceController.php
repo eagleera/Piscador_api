@@ -24,10 +24,12 @@ class AttendanceController extends Controller
         $date = $request->input('date');
         $date = \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
         $attendance =  Attendance::where('attendance_day', $date)->get();
-        dd($date, $attendance);
         foreach($attendance as $att) {
             $att->addWorker();
             $att->status = boolval($att->status);
+        }
+        if(sizeof($attendance) == 0){
+            return [];
         }
         return $attendance;
     }
