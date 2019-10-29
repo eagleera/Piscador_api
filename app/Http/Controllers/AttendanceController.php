@@ -19,11 +19,9 @@ class AttendanceController extends Controller
         //
     }
 
-    public function index(Request $request)
+    public function index(Request $request, $fecha)
     {
-        $date = $request->input('date');
-        $date = \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
-        $attendance =  Attendance::where('attendance_day', $date)->get();
+        $attendance =  Attendance::where('attendance_day', $fecha)->get();
         foreach($attendance as $att) {
             $att->addWorker();
             $att->status = boolval($att->status);

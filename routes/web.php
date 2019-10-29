@@ -28,7 +28,7 @@ Route::patch('/worker/{id}', ['as'=> 'update a worker', 'uses'=>'WorkersControll
 Route::delete('/worker/{id}', ['as'=> 'delete a worker', 'uses'=>'WorkersController@delete']);
 //ATTENDANCE
 Route::get('/attendance/payday', ['as'=> 'get attendance between two dates', 'uses'=>'AttendanceController@indexRange']);
-Route::get('/attendance', ['as'=> 'get attendance of one date', 'uses'=>'AttendanceController@index']);
+Route::get('/attendance/{fecha}', ['as'=> 'get attendance of one date', 'uses'=>'AttendanceController@index']);
 Route::post('/attendance', ['as'=> 'post an attendance', 'uses'=>'AttendanceController@store']);
 //JOURNAL
 Route::get('/journals', ['as'=> 'index journals', 'uses'=>'JournalController@index']);
