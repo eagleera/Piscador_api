@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\Worker;
 use App\Http\Models\Attendance;
 use Illuminate\Http\Request;
+use Log;
 
 class AttendanceController extends Controller
 {
@@ -24,6 +25,7 @@ class AttendanceController extends Controller
         $date = str_replace('/', '-', $date);
         $date = date('Y-m-d', strtotime($date));
         $attendance =  Attendance::where('attendance_day', $date)->get();
+        dd($attendance);
         foreach($attendance as $att) {
             $att->addWorker();
             $att->status = boolval($att->status);
