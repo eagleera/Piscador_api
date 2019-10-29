@@ -26,8 +26,6 @@ $app->withFacades();
 $app->withEloquent();
 
 $app->configure('cors');
-$app->configure('forcehttps');
-$app->register(CSUNMetaLab\LumenForceHttps\Providers\ForceHttpsServiceProvider::class);
 
 
 /*
@@ -66,8 +64,7 @@ $app->singleton(
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 $app->middleware([
-    \Barryvdh\Cors\HandleCors::class,
-    CSUNMetaLab\LumenForceHttps\Http\Middleware\ForceHttps::class
+    \Barryvdh\Cors\HandleCors::class
 ]);
 
 $app->routeMiddleware([
