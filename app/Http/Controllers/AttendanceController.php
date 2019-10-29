@@ -22,6 +22,7 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
         $date = $request->input('date');
+        dd($date);
         $date = \DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
         $attendance =  Attendance::where('attendance_day', $date)->get();
         dd($date, $attendance);
