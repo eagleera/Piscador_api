@@ -19,6 +19,7 @@ class CreateWorkersTable extends Migration
             $table->bigInteger('rol_id')->unsigned();
             $table->foreign('rol_id')->references('id')->on('roles');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

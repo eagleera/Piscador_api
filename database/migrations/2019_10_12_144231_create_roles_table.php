@@ -20,6 +20,7 @@ class CreateRolesTable extends Migration
             $table->bigInteger('tipo_id')->unsigned();
             $table->foreign('tipo_id')->references('id')->on('tipos_paga');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

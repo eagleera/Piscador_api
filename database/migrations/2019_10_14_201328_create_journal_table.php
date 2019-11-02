@@ -18,6 +18,7 @@ class CreateJournalTable extends Migration
             $table->double('amount');
             $table->text('notes');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
