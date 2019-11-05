@@ -17,9 +17,11 @@ class CreateJournalTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger('ranch_id')->unsigned();
+            $table->foreign('ranch_id')->references('id')->on('ranch');
             $table->double('amount');
             $table->text('notes');
-            $table->timestamps();
+            $table->nullableTimestamps();
             $table->softDeletes();
         });
     }

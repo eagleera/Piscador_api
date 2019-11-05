@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttendanceTable extends Migration
+class CreateRanchUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateAttendanceTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendance', function (Blueprint $table) {
+        Schema::create('ranch_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('ranch_id')->unsigned();
             $table->foreign('ranch_id')->references('id')->on('ranch');
-            $table->bigInteger('worker_id')->unsigned();
-            $table->foreign('worker_id')->references('id')->on('workers');
-            $table->date('attendance_day');
-            $table->boolean('status');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->nullableTimestamps();
             $table->softDeletes();
         });
@@ -33,6 +31,6 @@ class CreateAttendanceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendance');
+        Schema::dropIfExists('ranch_users');
     }
 }

@@ -17,11 +17,11 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->double('cantidad');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger('ranch_id')->unsigned();
+            $table->foreign('ranch_id')->references('id')->on('ranch');
             $table->bigInteger('tipo_id')->unsigned();
             $table->foreign('tipo_id')->references('id')->on('tipos_paga');
-            $table->timestamps();
+            $table->nullableTimestamps();
             $table->softDeletes();
         });
     }

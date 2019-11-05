@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Models\RanchHasUsers;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -49,8 +50,13 @@ class AuthController extends Controller
         }
         $token = Auth::setTTL(72000)->attempt($credentials);
         $user = User::where('email', $credentials['email'])->first();
+        $ranch = RanchHasUsers::where('user_id', $user->getKey())->get();
+        if(sizeof($ranch) == 0){
+            $ranch = false;
+        }
         $user->token = $token;
-        return $this->respondWithToken($user);
+        $user->ranch = $ranch;
+        return $user;
     }
 
 }
