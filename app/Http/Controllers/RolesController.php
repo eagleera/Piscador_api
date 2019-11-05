@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\Role;
 use App\Http\Models\TiposPaga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RolesController extends Controller
 {
@@ -32,6 +33,7 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
         $nombre = $request->input('nombre');
         $cantidad = $request->input('cantidad');
         $tipo_id = $request->input('tipo_id');
@@ -39,6 +41,7 @@ class RolesController extends Controller
         $role->nombre = $nombre;
         $role->cantidad = $cantidad;
         $role->tipo_id = $tipo_id;
+        $role->user_id = $user->getKey();
         $role->save();
         return response()->json(['status' => 'created']);
     }
