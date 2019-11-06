@@ -35,6 +35,8 @@ Route::get('/journals', ['as'=> 'index journals', 'uses'=>'JournalController@ind
 Route::post('/journal', ['as'=> 'create new journal', 'uses'=>'JournalController@store']);
 Route::patch('/journal/{id}', ['as'=> 'update a journal', 'uses'=>'JournalController@edit']);
 Route::delete('/journal/{id}', ['as'=> 'delete a journal', 'uses'=>'JournalController@delete']);
+//RANCH
+Route::post('/ranch', ['as'=> 'create new ranch', 'uses'=>'RanchController@store']);
 //USER
 Route::post('/register', ['as'=> 'register user', 'uses'=>'AuthController@register']);
 Route::post('/login', ['as'=> 'login user', 'uses'=>'AuthController@login']);

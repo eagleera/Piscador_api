@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Role;
-use App\Http\Models\TiposPaga;
+use App\Http\Models\Ranch;
+use App\Http\Models\RanchHasUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,33 +21,32 @@ class RanchController extends Controller
 
     public function index()
     {
-        $roles = Role::all();
+        $roles = Ranch::all();
         foreach($roles as $role) {
             $role->addTipo();
         }
         return $roles;
     }
-    public function indexTipos() {
-        return TiposPaga::all();
-    }
 
     public function store(Request $request)
     {
         $user = Auth::user();
-        $nombre = $request->input('nombre');
-        $cantidad = $request->input('cantidad');
-        $tipo_id = $request->input('tipo_id');
-        $role = new Role;
-        $role->nombre = $nombre;
-        $role->cantidad = $cantidad;
-        $role->tipo_id = $tipo_id;
-        $role->user_id = $user->getKey();
-        $role->save();
+        $name = $request->input('name');
+        $address = $request->input('address');
+        $size = $request->input('size');
+        $ranch = new Ranch;
+        $ranch->name = $name;
+        $ranch->address = $address;
+        $ranch->size = $size;
+        $ranch->save();
+        $ranchHasUsers = new RanchHasUsers;
+        $ranchHasUsers->ranch_id = $ranch->getKey();
+        $ranchHasUsers->user_id = $user->getKey();
         return response()->json(['status' => 'created']);
     }
 
     public function edit(Request $request, $id) {
-        $role = Role::find($id);
+        $role = Ranch::find($id);
         $nombre = $request->input('nombre');
         $cantidad = $request->input('cantidad');
         $tipo_id = $request->input('tipo_id');
@@ -59,7 +58,7 @@ class RanchController extends Controller
     }
 
     public function delete($id) {
-        $role = Role::find($id);
+        $role = Ranch::find($id);
         $role->delete();
         return response()->json(['status' => 'deleted']);
     }
