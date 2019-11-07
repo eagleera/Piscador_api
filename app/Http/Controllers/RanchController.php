@@ -22,7 +22,7 @@ class RanchController extends Controller
     public function index()
     {
         $roles = Ranch::all();
-        foreach($roles as $role) {
+        foreach ($roles as $role) {
             $role->addTipo();
         }
         return $roles;
@@ -34,6 +34,7 @@ class RanchController extends Controller
         $name = $request->input('name');
         $address = $request->input('address');
         $size = $request->input('size');
+
         $ranch = new Ranch;
         $ranch->name = $name;
         $ranch->address = $address;
@@ -43,10 +44,21 @@ class RanchController extends Controller
         $ranchHasUsers->ranch_id = $ranch->getKey();
         $ranchHasUsers->user_id = $user->getKey();
         $ranchHasUsers->save();
-        return response()->json(['status' => 'created']);
+        if ($request->input('firsttime')) {
+            $user->default_ranch = $ranch->getKey();
+            $user->save();
+        }
+        $user->addRanch();
+        return response()->json(
+            [
+                'status' => 'created',
+                'ranch ' => $ranch,
+                'user' => $user
+            ]);
     }
 
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $id)
+    {
         $role = Ranch::find($id);
         $nombre = $request->input('nombre');
         $cantidad = $request->input('cantidad');
@@ -58,7 +70,8 @@ class RanchController extends Controller
         return response()->json(['status' => 'updated']);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $role = Ranch::find($id);
         $role->delete();
         return response()->json(['status' => 'deleted']);

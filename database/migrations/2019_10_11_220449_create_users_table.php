@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->notNullable();
             $table->string('password');
+            $table->bigInteger('default_ranch')->unsigned()->nullable();
+            $table->foreign('default_ranch')->references('id')->on('ranch');
             $table->nullableTimestamps();
             $table->softDeletes();
         });

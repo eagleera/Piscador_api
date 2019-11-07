@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
-use App\Http\Models\RanchHasUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -44,18 +43,16 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only(['email', 'password']);
 
-        if (! $token = Auth::attempt($credentials)) {
+        if (!$token = Auth::attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
         $token = Auth::setTTL(72000)->attempt($credentials);
         $user = User::where('email', $credentials['email'])->first();
-        $ranch = RanchHasUsers::where('user_id', $user->getKey())->get();
-        if(sizeof($ranch) == 0){
-            $ranch = false;
+        $user->addRanch();
+        if (!$user->ranch) {
+            $user->ranch = false;
         }
         $user->token = $token;
-        $user->ranch = $ranch;
         return $user;
     }
-
 }
