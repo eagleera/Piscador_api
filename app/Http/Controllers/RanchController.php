@@ -42,6 +42,7 @@ class RanchController extends Controller
         $ranchHasUsers = new RanchHasUsers;
         $ranchHasUsers->ranch_id = $ranch->getKey();
         $ranchHasUsers->user_id = $user->getKey();
+        $ranchHasUsers->save();
         return response()->json(['status' => 'created']);
     }
 
