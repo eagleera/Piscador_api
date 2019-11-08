@@ -54,7 +54,7 @@ class RolesController extends Controller
         $cantidad = $request->input('cantidad');
         $tipo_id = $request->input('tipo_id');
         ($nombre) ? $role->nombre = $nombre : $role->nombre = $role->nombre;
-        ($cantidad) ? $role->nombre = $nombre : $role->nombre = $role->nombre;
+        ($cantidad) ? $role->cantidad = $cantidad : $role->cantidad = $role->cantidad;
         ($tipo_id) ? $role->tipo_id = $tipo_id : $role->tipo_id = $role->tipo_id;
         $role->save();
         return response()->json(['status' => 'updated']);
