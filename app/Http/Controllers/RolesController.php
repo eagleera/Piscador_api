@@ -21,12 +21,14 @@ class RolesController extends Controller
 
     public function index()
     {
-        $roles = Role::all();
+        $user = Auth::user();
+        $roles = Role::where('ranch_id', $user->default_ranch)->get();
         foreach($roles as $role) {
             $role->addTipo();
         }
         return $roles;
     }
+
     public function indexTipos() {
         return TiposPaga::all();
     }
@@ -41,7 +43,7 @@ class RolesController extends Controller
         $role->nombre = $nombre;
         $role->cantidad = $cantidad;
         $role->tipo_id = $tipo_id;
-        $role->user_id = $user->getKey();
+        $role->ranch_id = $user->default_ranch;
         $role->save();
         return response()->json(['status' => 'created']);
     }
