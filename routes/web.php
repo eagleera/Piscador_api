@@ -42,3 +42,5 @@ Route::post('/ranch/create-invite', ['as'=> 'create new ranch', 'uses'=>'RanchCo
 //USER
 Route::post('/register', ['as'=> 'register user', 'uses'=>'AuthController@register']);
 Route::post('/login', ['as'=> 'login user', 'uses'=>'AuthController@login']);
+Route::get('/me', ['as'=> 'get current user', 'uses'=>'AuthController@me']);
+Route::post('/logout', ['as'=> 'get current user', 'uses'=>'AuthController@logout']);

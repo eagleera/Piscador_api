@@ -55,4 +55,20 @@ class AuthController extends Controller
         $user->token = $token;
         return $user;
     }
+
+    public function me()
+    {
+        $user = Auth::user();
+        if($user) { 
+            $user->addRanch();
+            return response()->json(['user' => $user, 'msg' => 'success']);
+        }
+        return response()->json(['user' => false, 'msg' => 'unauthenticated']);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json(['msg' => 'logged out']);
+    }
 }
