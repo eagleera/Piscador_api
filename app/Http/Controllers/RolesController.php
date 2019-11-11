@@ -45,7 +45,7 @@ class RolesController extends Controller
         $role->tipo_id = $tipo_id;
         $role->ranch_id = $user->default_ranch;
         $role->save();
-        return response()->json(['status' => 'created']);
+        return response()->json(['msg' => 'created']);
     }
 
     public function edit(Request $request, $id) {
@@ -57,12 +57,12 @@ class RolesController extends Controller
         ($cantidad) ? $role->cantidad = $cantidad : $role->cantidad = $role->cantidad;
         ($tipo_id) ? $role->tipo_id = $tipo_id : $role->tipo_id = $role->tipo_id;
         $role->save();
-        return response()->json(['status' => 'updated']);
+        return response()->json(['msg' => 'updated']);
     }
 
     public function delete($id) {
         $role = Role::find($id);
         $role->delete();
-        return response()->json(['status' => 'deleted']);
+        return response()->json(['msg' => 'deleted']);
     }
 }

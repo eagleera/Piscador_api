@@ -2,18 +2,33 @@
 
 class CreateUserCest
 {
+
+    protected $token;
+
+    public function _before(\ApiTester $I)
+    {
+        $I->sendPOST('/login', [
+            'email' => 'daguilera3220@gmail.com',
+            'password' => '1234'
+        ]);
+        $response = $I->grabResponse();
+        $data = json_decode($response, true);
+        codecept_debug($data['token']);
+        $this->token = $data['token'];
+    }
+
     public function createUser(\ApiTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/register', [
             'name' => 'davert',
-            'email' => 'daguilera3220@gmail.com',
+            'email' => 'daguilera3221@gmail.com',
             'password' => '1234',
             'password_confirmation' => '1234'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::CREATED); // 201
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['message' => 'CREATED']);
+        $I->seeResponseContainsJson(['msg' => 'CREATED']);
     }
 
     public function loginUser(\ApiTester $I)
@@ -30,12 +45,26 @@ class CreateUserCest
 
     public function currentUser(\ApiTester $I)
     {
-        $accesToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkucGlzY2Fkb3JcL2xvZ2luIiwiaWF0IjoxNTczNDQwODQ4LCJleHAiOjE1Nzc3NjA4NDgsIm5iZiI6MTU3MzQ0MDg0OCwianRpIjoiQ1kzcjhvSmVwQkYwdFVveSIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.T_VlJRm-nkhUB4Y86fMomgBNHilQBYBUBxXmcioxoP0";
-        $I->amBearerAuthenticated($accesToken);
+        $I->amBearerAuthenticated($this->token);
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendGET('/me');
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['email' => 'daguilera3220@gmail.com']);
+        $I->seeResponseContainsJson(['user' => [
+            'name' => "davert",
+            'email' => "daguilera3220@gmail.com"
+        ],
+        'msg' => 'success'
+        ]);
+    }
+
+    public function logoutUser(\ApiTester $I)
+    {
+        $I->amBearerAuthenticated($this->token);
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendPOST('/logout');
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['msg' => 'logged out']);
     }
 }
