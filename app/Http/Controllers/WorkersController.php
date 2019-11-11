@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Worker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WorkersController extends Controller
 {
@@ -19,18 +20,21 @@ class WorkersController extends Controller
 
     public function index()
     {
-        return Worker::all();
+        $user = Auth::user();
+        return Worker::where('ranch_id', $user->default_ranch)->get();
     }
 
     public function store(Request $request)
     {
+        $user = Auth::user();
         $nombre = $request->input('nombre');
         $rol_id = $request->input('rol_id');
         $worker = new Worker;
         $worker->nombre = $nombre;
         $worker->rol_id = $rol_id;
+        $worker->ranch_id = $user->default_ranch;
         $worker->save();
-        return response()->json(['status' => 'created']);
+        return response()->json(['status' => 'created', 'worker'=> $worker]);
     }
 
     public function edit(Request $request, $id) {

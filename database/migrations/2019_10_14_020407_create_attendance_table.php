@@ -20,7 +20,7 @@ class CreateAttendanceTable extends Migration
             $table->bigInteger('worker_id')->unsigned();
             $table->foreign('worker_id')->references('id')->on('workers');
             $table->date('attendance_day');
-            $table->boolean('status');
+            $table->double('status', 2, 2);	
             $table->nullableTimestamps();
             $table->softDeletes();
         });

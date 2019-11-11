@@ -4,7 +4,8 @@ class CreateUserCest
 {
     public function createUserViaAPI(\ApiTester $I)
     {
-        $accesToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkucGlzY2Fkb3JcL2xvZ2luIiwiaWF0IjoxNTczMDE1MDQzLCJleHAiOjE1NzczMzUwNDMsIm5iZiI6MTU3MzAxNTA0MywianRpIjoiRDVKeHFZUEV4ZmZwanhDdyIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.zcDqKyQHUt6yBJo2859tyQraRr4sVa161V4VYZTKQp4";
+        $I->amConnectedToDatabase ('test');
+        $accesToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkucGlzY2Fkb3JcL2xvZ2luIiwiaWF0IjoxNTczNDMxODA2LCJleHAiOjE1Nzc3NTE4MDYsIm5iZiI6MTU3MzQzMTgwNiwianRpIjoiWFpVQ2RlcWR0UEpZR05reiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.19cd-Zk8gElgrD7zuaVao-Ut4zj-SegVFOmDTQaEO1A";
         $I->amBearerAuthenticated($accesToken);
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/register', [
