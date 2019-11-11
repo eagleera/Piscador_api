@@ -1,10 +1,10 @@
 <?php
 
 return [
-   'default' => 'pgsql',
+   'default' => env('CURRENT_DB'),
    'migrations' => 'migrations',
    'connections' => [
-        'pgsql' => [
+        'main' => [
             'driver'    => 'pgsql',
             'host'      => env('DB_HOST'),
             'port'      => env('DB_PORT'),

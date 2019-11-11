@@ -5,7 +5,3 @@ modules:
             url: http://api.piscador
             depends: PhpBrowser
             part: Json
-        - Db:
-            dsn: 'pgsql:host=localhost;dbname=testdb'
-            user: 'homestead'
-            password: 'secret'

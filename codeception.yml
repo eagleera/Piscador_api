@@ -13,7 +13,9 @@ suites:
                     dsn: 'pgsql:host=localhost;dbname=testdb'
                     user: 'homestead'
                     password: 'secret'
-
+                    dump: 'dump.dump'
+                    cleanup: true
+                    populate: true
 paths:
     tests: tests
     output: tests/_output
