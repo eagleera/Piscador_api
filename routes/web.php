@@ -31,16 +31,16 @@ Route::get('/attendance/payday', ['as'=> 'get attendance between two dates', 'us
 Route::get('/attendance/{fecha}', ['as'=> 'get attendance of one date', 'uses'=>'AttendanceController@index']);
 Route::post('/attendance', ['as'=> 'post an attendance', 'uses'=>'AttendanceController@store']);
 //JOURNAL
-Route::get('/journals', ['as'=> 'index journals', 'uses'=>'JournalController@index']);
-Route::post('/journal', ['as'=> 'create new journal', 'uses'=>'JournalController@store']);
-Route::patch('/journal/{id}', ['as'=> 'update a journal', 'uses'=>'JournalController@edit']);
-Route::delete('/journal/{id}', ['as'=> 'delete a journal', 'uses'=>'JournalController@delete']);
+// Route::get('/journals', ['as'=> 'index journals', 'uses'=>'JournalController@index']);
+// Route::post('/journal', ['as'=> 'create new journal', 'uses'=>'JournalController@store']);
+// Route::patch('/journal/{id}', ['as'=> 'update a journal', 'uses'=>'JournalController@edit']);
+// Route::delete('/journal/{id}', ['as'=> 'delete a journal', 'uses'=>'JournalController@delete']);
 //RANCH
 Route::post('/ranch', ['as'=> 'create new ranch', 'uses'=>'RanchController@store']);
-Route::post('/ranch/add-invite', ['as'=> 'create new ranch', 'uses'=>'RanchController@storeInvite']);
-Route::post('/ranch/create-invite', ['as'=> 'create new ranch', 'uses'=>'RanchController@createInvite']);
+Route::post('/ranch/add-invite', ['as'=> 'accept invite', 'uses'=>'RanchController@storeInvite']);
+Route::post('/ranch/create-invite', ['as'=> 'generate invite', 'uses'=>'RanchController@createInvite']);
 //USER
 Route::post('/register', ['as'=> 'register user', 'uses'=>'AuthController@register']);
 Route::post('/login', ['as'=> 'login user', 'uses'=>'AuthController@login']);
 Route::get('/me', ['as'=> 'get current user', 'uses'=>'AuthController@me']);
-Route::post('/logout', ['as'=> 'get current user', 'uses'=>'AuthController@logout']);
+Route::post('/logout', ['as'=> 'log out', 'uses'=>'AuthController@logout']);

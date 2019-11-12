@@ -34,7 +34,7 @@ class WorkersController extends Controller
         $worker->rol_id = $rol_id;
         $worker->ranch_id = $user->default_ranch;
         $worker->save();
-        return response()->json(['status' => 'created', 'worker'=> $worker]);
+        return response()->json(['msg' => 'created', 'worker'=> $worker]);
     }
 
     public function edit(Request $request, $id) {
@@ -44,12 +44,13 @@ class WorkersController extends Controller
         ($nombre) ? $worker->nombre = $nombre : $worker->nombre = $worker->nombre;
         ($rol_id) ? $worker->rol_id = $rol_id : $worker->rol_id = $worker->rol_id;
         $worker->save();
-        return response()->json(['status' => 'updated']);
+        return response()->json(['msg' => 'updated']);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $worker = Worker::find($id);
         $worker->delete();
-        return response()->json(['status' => 'deleted']);
+        return response()->json(['msg' => 'deleted']);
     }
 }

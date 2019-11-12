@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Ranch;
 use App\Http\Models\RanchHasUsers;
+use App\Http\Models\Invite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,29 +52,59 @@ class RanchController extends Controller
         $user->addRanch();
         return response()->json(
             [
-                'status' => 'created',
+                'msg' => 'created',
                 'ranch ' => $ranch,
                 'user' => $user
             ]);
     }
 
-    public function edit(Request $request, $id)
+    // public function edit(Request $request, $id)
+    // {
+    //     $role = Ranch::find($id);
+    //     $nombre = $request->input('nombre');
+    //     $cantidad = $request->input('cantidad');
+    //     $tipo_id = $request->input('tipo_id');
+    //     ($nombre) ? $role->nombre = $nombre : $role->nombre = $role->nombre;
+    //     ($cantidad) ? $role->nombre = $nombre : $role->nombre = $role->nombre;
+    //     ($tipo_id) ? $role->tipo_id = $tipo_id : $role->tipo_id = $role->tipo_id;
+    //     $role->save();
+    //     return response()->json(['msg' => 'updated']);
+    // }
+
+    // public function delete($id)
+    // {
+    //     $role = Ranch::find($id);
+    //     $role->delete();
+    //     return response()->json(['msg' => 'deleted']);
+    // }
+    
+    public function createInvite(Request $request)
     {
-        $role = Ranch::find($id);
-        $nombre = $request->input('nombre');
-        $cantidad = $request->input('cantidad');
-        $tipo_id = $request->input('tipo_id');
-        ($nombre) ? $role->nombre = $nombre : $role->nombre = $role->nombre;
-        ($cantidad) ? $role->nombre = $nombre : $role->nombre = $role->nombre;
-        ($tipo_id) ? $role->tipo_id = $tipo_id : $role->tipo_id = $role->tipo_id;
-        $role->save();
-        return response()->json(['status' => 'updated']);
+        $user = Auth::user();
+        $code = $request->input('codigo');
+        $invite = new Invite;
+        $invite->ranch_id = $user->default_ranch;
+        $invite->codigo = $code;
+        $invite->taken = 0;
+        $invite->save();
+        return response()->json(['msg' => 'created']);
     }
 
-    public function delete($id)
+    public function storeInvite(Request $request)
     {
-        $role = Ranch::find($id);
-        $role->delete();
-        return response()->json(['status' => 'deleted']);
+        $user = Auth::user();
+        $code = $request->input('codigo');
+        $invite = Invite::where('codigo', $code)->first();
+        $invite->taken = true;
+        $ranchHasUsers = new RanchHasUsers;
+        $ranchHasUsers->ranch_id = $invite->ranch_id;
+        $ranchHasUsers->user_id = $user->getKey();
+        if(!$user->default_ranch){
+            $user->default_ranch = $invite->ranch_id;
+            $user->save();
+        }
+        $ranchHasUsers->save();
+        $invite->save();
+        return response()->json(['msg' => 'added']);
     }
 }

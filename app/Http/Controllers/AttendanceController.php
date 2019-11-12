@@ -23,11 +23,10 @@ class AttendanceController extends Controller
     public function index(Request $request, $fecha)
     {
         $user = Auth::user();
-        $attendance =  Attendance::where(
-            [
-                'attendance_day'=> $fecha,
-                'ranch_id' => $user->default_ranch
-            ])->get();
+        $attendance =  Attendance::where([
+            'attendance_day'=> $fecha,
+            'ranch_id' => $user->default_ranch
+        ])->get();
         foreach($attendance as $att) {
             $att->addWorker();
             $att->status = boolval($att->status);
@@ -70,12 +69,12 @@ class AttendanceController extends Controller
             $attendance->attendance_day = $date;
             $attendance->save();
         }
-        return response()->json(['status' => 'registered']);
+        return response()->json(['msg' => 'registered']);
     }
 
-    public function edit(Request $request, $id) {
-    }
+    // public function edit(Request $request, $id) {
+    // }
 
-    public function delete($id) {
-    }
+    // public function delete($id) {
+    // }
 }

@@ -473,6 +473,9 @@ ALTER TABLE ONLY public.workers ALTER COLUMN id SET DEFAULT nextval('public.work
 --
 
 COPY public.attendance (id, ranch_id, worker_id, attendance_day, status, created_at, updated_at, deleted_at) FROM stdin;
+1	1	1	2019-11-10	1	2019-11-12 04:38:10	2019-11-12 04:38:10	\N
+2	1	1	2019-11-11	1	2019-11-12 04:38:15	2019-11-12 04:38:15	\N
+3	1	1	2019-11-12	0	2019-11-12 04:38:21	2019-11-12 04:38:21	\N
 \.
 
 
@@ -481,6 +484,7 @@ COPY public.attendance (id, ranch_id, worker_id, attendance_day, status, created
 --
 
 COPY public.invite (id, ranch_id, codigo, taken, created_at, updated_at, deleted_at) FROM stdin;
+1	1	123456	f	2019-11-11 05:18:08	2019-11-11 05:18:08	\N
 \.
 
 
@@ -555,6 +559,7 @@ COPY public.tipos_paga (id, nombre, created_at, updated_at, deleted_at) FROM std
 
 COPY public.users (id, name, email, password, default_ranch, created_at, updated_at, deleted_at) FROM stdin;
 1	davert	daguilera3220@gmail.com	$2y$10$BTw9oY/MI1lsOikh5UWYw.s4nYvJE5f8dU9G6Cu9xheMrWgUQ2uV.	1	2019-11-11 03:24:05	2019-11-11 05:18:08	\N
+2	Prueba	prueba_email@gg.com	$2y$10$C8WYwK3XCo5xc3/sq17iJOmhcxeHSljl7h6Py6N1ez6cJD1XjZNVq	\N	2019-11-11 22:37:01	2019-11-11 22:37:01	\N
 \.
 
 
@@ -563,7 +568,7 @@ COPY public.users (id, name, email, password, default_ranch, created_at, updated
 --
 
 COPY public.workers (id, nombre, ranch_id, rol_id, created_at, updated_at, deleted_at) FROM stdin;
-1	Trabajador prueba	1	1	2019-11-11 05:18:47	2019-11-11 05:18:47	\N
+1	Trabajador prueba	1	1	2019-11-11 05:18:47	2019-11-12 04:29:32	\N
 \.
 
 
@@ -571,14 +576,14 @@ COPY public.workers (id, nombre, ranch_id, rol_id, created_at, updated_at, delet
 -- Name: attendance_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
 --
 
-SELECT pg_catalog.setval('public.attendance_id_seq', 1, false);
+SELECT pg_catalog.setval('public.attendance_id_seq', 3, true);
 
 
 --
 -- Name: invite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
 --
 
-SELECT pg_catalog.setval('public.invite_id_seq', 1, false);
+SELECT pg_catalog.setval('public.invite_id_seq', 1, true);
 
 
 --
@@ -627,7 +632,7 @@ SELECT pg_catalog.setval('public.tipos_paga_id_seq', 4, true);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 
 
 --

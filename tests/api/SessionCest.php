@@ -13,7 +13,6 @@ class CreateUserCest
         ]);
         $response = $I->grabResponse();
         $data = json_decode($response, true);
-        codecept_debug($data['token']);
         $this->token = $data['token'];
     }
 
