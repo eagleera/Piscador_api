@@ -40,12 +40,8 @@ class AttendanceController extends Controller
     public function indexRange(Request $request)
     {
         $user = Auth::user();
-        $init_date = $request->input('init_date');
-        $init_date = str_replace('/', '-', $init_date);
-        $init_date = date('Y-m-d', strtotime($init_date));
-        $end_date = $request->input('end_date');
-        $end_date = str_replace('/', '-', $end_date);
-        $end_date = date('Y-m-d', strtotime($end_date));
+        $init_date = $this->transformDate($request->input('init_date'));
+        $end_date = $this->transformDate($request->input('end_date'));
         $attendance = Attendance::where('ranch_id', $user->default_ranch)->whereBetween('attendance_day',[$init_date, $end_date])->get();
         foreach($attendance as $att) {
             $att->addWorker();
@@ -77,4 +73,9 @@ class AttendanceController extends Controller
 
     // public function delete($id) {
     // }
+    public function transformDate($date)
+    {
+        $date = str_replace('/', '-', $date);
+        return date('Y-m-d', strtotime($date));
+    }
 }
