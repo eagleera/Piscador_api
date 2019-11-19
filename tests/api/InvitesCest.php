@@ -1,6 +1,6 @@
 <?php 
 
-class InvitesCest
+class InvitesApiCest
 {
     public function _before(ApiTester $I)
     {

@@ -1,6 +1,6 @@
 <?php 
 
-class RanchCest
+class RanchApiCest
 {
     public function _before(\ApiTester $I)
     {

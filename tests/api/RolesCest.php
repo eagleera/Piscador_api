@@ -1,6 +1,6 @@
 <?php 
 
-class RolesCest
+class RolesApiCest
 {
     protected $token;
 

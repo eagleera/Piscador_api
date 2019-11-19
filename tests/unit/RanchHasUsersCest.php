@@ -1,6 +1,6 @@
 <?php
 
-class RanchHasUsersCest
+class RanchHasUsersUnitCest
 {
     public function canCreateRanchHasUser(UnitTester $I)
     {

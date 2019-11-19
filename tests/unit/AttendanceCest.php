@@ -1,6 +1,6 @@
 <?php
 
-class AttendanceCest
+class AttendanceUnitCest
 {
     public function canCreateAttendance(UnitTester $I)
     {

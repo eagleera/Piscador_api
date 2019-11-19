@@ -1,6 +1,6 @@
 <?php
 
-class InviteCest
+class InviteUnitCest
 {
     public function canCreateInvite(UnitTester $I)
     {

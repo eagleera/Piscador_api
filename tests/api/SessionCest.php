@@ -1,6 +1,6 @@
 <?php 
 
-class CreateUserCest
+class CreateUserApiCest
 {
 
     protected $token;

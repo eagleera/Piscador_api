@@ -1,6 +1,6 @@
 <?php
 
-class TiposPagaCest
+class TiposPagaUnitCest
 {
     public function canCreateTiposPaga(UnitTester $I)
     {

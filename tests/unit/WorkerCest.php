@@ -1,6 +1,6 @@
 <?php
 
-class WorkerCest
+class WorkerUnitCest
 {
     public function canCreateWorker(UnitTester $I)
     {

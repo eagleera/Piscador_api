@@ -1,6 +1,6 @@
 <?php 
 
-class WorkersCest
+class WorkersApiCest
 {
     public function _before(\ApiTester $I)
     {

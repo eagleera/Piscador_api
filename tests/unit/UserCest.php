@@ -1,6 +1,6 @@
 <?php
 
-class UserCest
+class UserUnitCest
 {
     public function canCreateUser(UnitTester $I)
     {

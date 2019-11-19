@@ -1,6 +1,6 @@
 <?php
 
-class JournalCest
+class JournalUnitCest
 {
     public function canCreateJournal(UnitTester $I)
     {

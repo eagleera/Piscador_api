@@ -1,6 +1,6 @@
 <?php
 
-class RoleCest
+class RoleUnitCest
 {
     public function canCreateRole(UnitTester $I)
     {
