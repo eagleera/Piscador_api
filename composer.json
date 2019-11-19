@@ -9,6 +9,7 @@
         "barryvdh/laravel-cors": "^0.11.4",
         "csun-metalab/lumen-force-https": "^1.0",
         "fzaninotto/faker": "^1.8",
+        "jenssegers/mongodb": "^3.6",
         "laravel/lumen-framework": "^6.0",
         "tymon/jwt-auth": "dev-develop"
     },
