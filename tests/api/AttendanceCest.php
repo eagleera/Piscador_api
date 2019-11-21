@@ -43,7 +43,7 @@ class AttendanceApiCest
         ]]);
     }
     
-    public function getRangeAttendance(ApiTester $I)
+    public function getPayday(ApiTester $I)
     {
         $I->amBearerAuthenticated($this->token);
         $I->haveHttpHeader('Content-Type', 'application/json');
@@ -56,10 +56,7 @@ class AttendanceApiCest
         $response = $I->grabResponse();
         $data = json_decode($response, true);
         \PHPUnit_Framework_Assert::assertCount(3, $data);
-        $I->seeResponseContainsJson([0 =>[
-            'attendance_day' => '2019-11-10',
-            'ranch_id' => 1,
-            'status' => "1"
-        ]]);
+        \PHPUnit_Framework_Assert::assertEquals($data["cambio"], [0,0,0,0,1,0,1]);
+        \PHPUnit_Framework_Assert::assertEquals($data["total"], 25);
     }
 }

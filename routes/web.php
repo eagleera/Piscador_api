@@ -12,6 +12,8 @@
 */
 
 $router->get('/', function () use ($router) {
+    $hola = json_decode('{"attendance":[{"payday":[{"status":"1","date":"2019-11-10"},{"status":"1","date":"2019-11-11"},{"status":"0","date":"2019-11-12"}],"worker_id":1,"worker":{"id":1,"nombre":"Trabajador prueba","ranch_id":1,"rol_id":1,"created_at":"2019-11-11 05:18:47","updated_at":"2019-11-12 04:29:32","deleted_at":null,"role":{"id":1,"nombre":"Rol prueba 1","cantidad":"12","ranch_id":1,"tipo_id":1,"created_at":"2019-11-11 05:18:24","updated_at":"2019-11-11 05:18:24","deleted_at":null,"tipo":{"id":1,"nombre":"Diario","created_at":"2019-11-11 04:01:38","updated_at":null,"deleted_at":null}}},"total":24,"cambio":[0,0,0,0,1,0,1]}],"cambio":[0,0,0,0,1,0,1],"total":25}', true);
+    dd($hola["cambio"]);
     return $router->app->version();
 });
 //TIPOS

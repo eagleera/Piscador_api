@@ -125,6 +125,7 @@ class AttendanceController extends Controller
         unset($attend);
         return $attendance_arr;
     }
+
     public function calculateCambio(array $attendance) : array
     {
         $total_cambio = [];
