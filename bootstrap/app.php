@@ -27,6 +27,7 @@ $app->withEloquent();
 
 $app->configure('cors');
 
+$app->configure('database');
 
 /*
 |--------------------------------------------------------------------------

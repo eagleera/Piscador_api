@@ -1,0 +1,840 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.5 (Ubuntu 11.5-1.pgdg18.04+1)
+-- Dumped by pg_dump version 11.5 (Ubuntu 11.5-1.pgdg18.04+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: attendance; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.attendance (
+    id bigint NOT NULL,
+    ranch_id bigint NOT NULL,
+    worker_id bigint NOT NULL,
+    attendance_day date NOT NULL,
+    status double precision NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.attendance OWNER TO homestead;
+
+--
+-- Name: attendance_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.attendance_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.attendance_id_seq OWNER TO homestead;
+
+--
+-- Name: attendance_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.attendance_id_seq OWNED BY public.attendance.id;
+
+
+--
+-- Name: invite; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.invite (
+    id bigint NOT NULL,
+    ranch_id bigint NOT NULL,
+    codigo character varying(255) NOT NULL,
+    taken boolean NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.invite OWNER TO homestead;
+
+--
+-- Name: invite_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.invite_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.invite_id_seq OWNER TO homestead;
+
+--
+-- Name: invite_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.invite_id_seq OWNED BY public.invite.id;
+
+
+--
+-- Name: journal; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.journal (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    ranch_id bigint NOT NULL,
+    amount double precision NOT NULL,
+    notes text NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.journal OWNER TO homestead;
+
+--
+-- Name: journal_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.journal_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.journal_id_seq OWNER TO homestead;
+
+--
+-- Name: journal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.journal_id_seq OWNED BY public.journal.id;
+
+
+--
+-- Name: migrations; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.migrations (
+    id integer NOT NULL,
+    migration character varying(255) NOT NULL,
+    batch integer NOT NULL
+);
+
+
+ALTER TABLE public.migrations OWNER TO homestead;
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.migrations_id_seq OWNER TO homestead;
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.migrations_id_seq OWNED BY public.migrations.id;
+
+
+--
+-- Name: ranch; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.ranch (
+    id bigint NOT NULL,
+    name character varying(255),
+    address character varying(255),
+    size character varying(255),
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.ranch OWNER TO homestead;
+
+--
+-- Name: ranch_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.ranch_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ranch_id_seq OWNER TO homestead;
+
+--
+-- Name: ranch_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.ranch_id_seq OWNED BY public.ranch.id;
+
+
+--
+-- Name: ranch_users; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.ranch_users (
+    id bigint NOT NULL,
+    ranch_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.ranch_users OWNER TO homestead;
+
+--
+-- Name: ranch_users_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.ranch_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ranch_users_id_seq OWNER TO homestead;
+
+--
+-- Name: ranch_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.ranch_users_id_seq OWNED BY public.ranch_users.id;
+
+
+--
+-- Name: roles; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.roles (
+    id bigint NOT NULL,
+    nombre character varying(255) NOT NULL,
+    cantidad double precision NOT NULL,
+    ranch_id bigint NOT NULL,
+    tipo_id bigint NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.roles OWNER TO homestead;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.roles_id_seq OWNER TO homestead;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
+
+
+--
+-- Name: tipos_paga; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.tipos_paga (
+    id bigint NOT NULL,
+    nombre character varying(255) NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.tipos_paga OWNER TO homestead;
+
+--
+-- Name: tipos_paga_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.tipos_paga_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipos_paga_id_seq OWNER TO homestead;
+
+--
+-- Name: tipos_paga_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.tipos_paga_id_seq OWNED BY public.tipos_paga.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
+    default_ranch bigint,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO homestead;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO homestead;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: workers; Type: TABLE; Schema: public; Owner: homestead
+--
+
+CREATE TABLE public.workers (
+    id bigint NOT NULL,
+    nombre character varying(255) NOT NULL,
+    ranch_id bigint NOT NULL,
+    rol_id bigint NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.workers OWNER TO homestead;
+
+--
+-- Name: workers_id_seq; Type: SEQUENCE; Schema: public; Owner: homestead
+--
+
+CREATE SEQUENCE public.workers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workers_id_seq OWNER TO homestead;
+
+--
+-- Name: workers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: homestead
+--
+
+ALTER SEQUENCE public.workers_id_seq OWNED BY public.workers.id;
+
+
+--
+-- Name: attendance id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.attendance ALTER COLUMN id SET DEFAULT nextval('public.attendance_id_seq'::regclass);
+
+
+--
+-- Name: invite id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.invite ALTER COLUMN id SET DEFAULT nextval('public.invite_id_seq'::regclass);
+
+
+--
+-- Name: journal id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.journal ALTER COLUMN id SET DEFAULT nextval('public.journal_id_seq'::regclass);
+
+
+--
+-- Name: migrations id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.migrations ALTER COLUMN id SET DEFAULT nextval('public.migrations_id_seq'::regclass);
+
+
+--
+-- Name: ranch id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.ranch ALTER COLUMN id SET DEFAULT nextval('public.ranch_id_seq'::regclass);
+
+
+--
+-- Name: ranch_users id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.ranch_users ALTER COLUMN id SET DEFAULT nextval('public.ranch_users_id_seq'::regclass);
+
+
+--
+-- Name: roles id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.roles ALTER COLUMN id SET DEFAULT nextval('public.roles_id_seq'::regclass);
+
+
+--
+-- Name: tipos_paga id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.tipos_paga ALTER COLUMN id SET DEFAULT nextval('public.tipos_paga_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: workers id; Type: DEFAULT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.workers ALTER COLUMN id SET DEFAULT nextval('public.workers_id_seq'::regclass);
+
+
+--
+-- Data for Name: attendance; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.attendance (id, ranch_id, worker_id, attendance_day, status, created_at, updated_at, deleted_at) FROM stdin;
+1	1	1	2019-11-10	1	2019-11-12 04:38:10	2019-11-12 04:38:10	\N
+2	1	1	2019-11-11	1	2019-11-12 04:38:15	2019-11-12 04:38:15	\N
+3	1	1	2019-11-12	0	2019-11-12 04:38:21	2019-11-12 04:38:21	\N
+\.
+
+
+--
+-- Data for Name: invite; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.invite (id, ranch_id, codigo, taken, created_at, updated_at, deleted_at) FROM stdin;
+1	1	123456	f	2019-11-11 05:18:08	2019-11-11 05:18:08	\N
+\.
+
+
+--
+-- Data for Name: journal; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.journal (id, user_id, ranch_id, amount, notes, created_at, updated_at, deleted_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.migrations (id, migration, batch) FROM stdin;
+1	2019_10_11_153434_create_tipospaga_table	1
+2	2019_10_11_220137_create_ranch_table	1
+3	2019_10_11_220449_create_users_table	1
+4	2019_10_11_220540_create_ranch_users_table	1
+5	2019_10_12_144231_create_roles_table	1
+6	2019_10_14_014030_create_workers_table	1
+7	2019_10_14_020407_create_attendance_table	1
+8	2019_10_14_201328_create_journal_table	1
+9	2019_11_07_222017_create_invite_table	1
+\.
+
+
+--
+-- Data for Name: ranch; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.ranch (id, name, address, size, created_at, updated_at, deleted_at) FROM stdin;
+1	Rancho prueba	prueba dirección	12	2019-11-11 05:18:08	2019-11-11 05:18:08	\N
+\.
+
+
+--
+-- Data for Name: ranch_users; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.ranch_users (id, ranch_id, user_id, created_at, updated_at, deleted_at) FROM stdin;
+1	1	1	2019-11-11 05:18:08	2019-11-11 05:18:08	\N
+\.
+
+
+--
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.roles (id, nombre, cantidad, ranch_id, tipo_id, created_at, updated_at, deleted_at) FROM stdin;
+1	Rol prueba 1	12	1	1	2019-11-11 05:18:24	2019-11-11 05:18:24	\N
+2	Rol prueba 2	15	1	1	2019-11-11 05:18:35	2019-11-11 05:18:35	\N
+\.
+
+
+--
+-- Data for Name: tipos_paga; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.tipos_paga (id, nombre, created_at, updated_at, deleted_at) FROM stdin;
+1	Diario	2019-11-11 04:01:38	\N	\N
+2	Semanal	2019-11-11 04:01:38	\N	\N
+3	Mensual	2019-11-11 04:01:38	\N	\N
+4	Por kg/arpilla	2019-11-11 04:01:38	\N	\N
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.users (id, name, email, password, default_ranch, created_at, updated_at, deleted_at) FROM stdin;
+1	davert	daguilera3220@gmail.com	$2y$10$BTw9oY/MI1lsOikh5UWYw.s4nYvJE5f8dU9G6Cu9xheMrWgUQ2uV.	1	2019-11-11 03:24:05	2019-11-11 05:18:08	\N
+2	Prueba	prueba_email@gg.com	$2y$10$C8WYwK3XCo5xc3/sq17iJOmhcxeHSljl7h6Py6N1ez6cJD1XjZNVq	\N	2019-11-11 22:37:01	2019-11-11 22:37:01	\N
+\.
+
+
+--
+-- Data for Name: workers; Type: TABLE DATA; Schema: public; Owner: homestead
+--
+
+COPY public.workers (id, nombre, ranch_id, rol_id, created_at, updated_at, deleted_at) FROM stdin;
+1	Trabajador prueba	1	1	2019-11-11 05:18:47	2019-11-12 04:29:32	\N
+\.
+
+
+--
+-- Name: attendance_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.attendance_id_seq', 3, true);
+
+
+--
+-- Name: invite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.invite_id_seq', 1, true);
+
+
+--
+-- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.journal_id_seq', 1, false);
+
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.migrations_id_seq', 9, true);
+
+
+--
+-- Name: ranch_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.ranch_id_seq', 1, true);
+
+
+--
+-- Name: ranch_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.ranch_users_id_seq', 1, true);
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.roles_id_seq', 2, true);
+
+
+--
+-- Name: tipos_paga_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.tipos_paga_id_seq', 4, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
+
+
+--
+-- Name: workers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: homestead
+--
+
+SELECT pg_catalog.setval('public.workers_id_seq', 1, true);
+
+
+--
+-- Name: attendance attendance_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.attendance
+    ADD CONSTRAINT attendance_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invite invite_codigo_unique; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.invite
+    ADD CONSTRAINT invite_codigo_unique UNIQUE (codigo);
+
+
+--
+-- Name: invite invite_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.invite
+    ADD CONSTRAINT invite_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: journal journal_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.journal
+    ADD CONSTRAINT journal_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.migrations
+    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ranch ranch_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.ranch
+    ADD CONSTRAINT ranch_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ranch_users ranch_users_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.ranch_users
+    ADD CONSTRAINT ranch_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tipos_paga tipos_paga_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.tipos_paga
+    ADD CONSTRAINT tipos_paga_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_unique UNIQUE (email);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workers workers_pkey; Type: CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.workers
+    ADD CONSTRAINT workers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: attendance attendance_ranch_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.attendance
+    ADD CONSTRAINT attendance_ranch_id_foreign FOREIGN KEY (ranch_id) REFERENCES public.ranch(id);
+
+
+--
+-- Name: attendance attendance_worker_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.attendance
+    ADD CONSTRAINT attendance_worker_id_foreign FOREIGN KEY (worker_id) REFERENCES public.workers(id);
+
+
+--
+-- Name: invite invite_ranch_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.invite
+    ADD CONSTRAINT invite_ranch_id_foreign FOREIGN KEY (ranch_id) REFERENCES public.ranch(id);
+
+
+--
+-- Name: journal journal_ranch_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.journal
+    ADD CONSTRAINT journal_ranch_id_foreign FOREIGN KEY (ranch_id) REFERENCES public.ranch(id);
+
+
+--
+-- Name: journal journal_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.journal
+    ADD CONSTRAINT journal_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: ranch_users ranch_users_ranch_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.ranch_users
+    ADD CONSTRAINT ranch_users_ranch_id_foreign FOREIGN KEY (ranch_id) REFERENCES public.ranch(id);
+
+
+--
+-- Name: ranch_users ranch_users_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.ranch_users
+    ADD CONSTRAINT ranch_users_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: roles roles_ranch_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT roles_ranch_id_foreign FOREIGN KEY (ranch_id) REFERENCES public.ranch(id);
+
+
+--
+-- Name: roles roles_tipo_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT roles_tipo_id_foreign FOREIGN KEY (tipo_id) REFERENCES public.tipos_paga(id);
+
+
+--
+-- Name: users users_default_ranch_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_default_ranch_foreign FOREIGN KEY (default_ranch) REFERENCES public.ranch(id);
+
+
+--
+-- Name: workers workers_ranch_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.workers
+    ADD CONSTRAINT workers_ranch_id_foreign FOREIGN KEY (ranch_id) REFERENCES public.ranch(id);
+
+
+--
+-- Name: workers workers_rol_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: homestead
+--
+
+ALTER TABLE ONLY public.workers
+    ADD CONSTRAINT workers_rol_id_foreign FOREIGN KEY (rol_id) REFERENCES public.roles(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

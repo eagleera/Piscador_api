@@ -10,7 +10,8 @@ class Worker extends Model {
     protected $primaryKey = 'id';
     protected $fillable = [
         'nombre',
-        'rol_id'
+        'rol_id',
+        'ranch_id'
     ];
 
     public function role() {

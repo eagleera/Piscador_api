@@ -2,12 +2,14 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
-class Journal extends Model {
-    protected $table = 'journal';
+
+class Invite extends Model {
+
+    protected $table = 'invite';
+    
     protected $fillable = [
-        'user_id',
         'ranch_id',
-        'amount',
-        'notes'
+        'codigo',
+        'taken'
     ];
 }

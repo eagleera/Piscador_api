@@ -19,7 +19,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'default_ranch'
     ];
 
     /**
@@ -31,6 +31,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    public function ranch() {
+        return $this->belongsTo('App\Http\Models\Ranch', 'default_ranch');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -39,5 +43,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function addRanch()
+    {
+        $this->ranch = $this->ranch()->first();
     }
 }

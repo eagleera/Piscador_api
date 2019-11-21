@@ -16,9 +16,11 @@ class CreateWorkersTable extends Migration
         Schema::create('workers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
+            $table->bigInteger('ranch_id')->unsigned();
+            $table->foreign('ranch_id')->references('id')->on('ranch');
             $table->bigInteger('rol_id')->unsigned();
             $table->foreign('rol_id')->references('id')->on('roles');
-            $table->timestamps();
+            $table->nullableTimestamps();
             $table->softDeletes();
         });
     }

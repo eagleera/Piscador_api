@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipospagaTable extends Migration
+class CreateRanchTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateTipospagaTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_paga', function (Blueprint $table) {
+        Schema::create('ranch', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('size')->nullable();
             $table->nullableTimestamps();
             $table->softDeletes();
         });
@@ -28,6 +30,6 @@ class CreateTipospagaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_paga');
+        Schema::dropIfExists('ranch');
     }
 }

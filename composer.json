@@ -8,13 +8,14 @@
         "php": "^7.2",
         "barryvdh/laravel-cors": "^0.11.4",
         "csun-metalab/lumen-force-https": "^1.0",
+        "fzaninotto/faker": "^1.8",
         "laravel/lumen-framework": "^6.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.4",
-        "phpunit/phpunit": "^8.0",
-        "mockery/mockery": "^1.0"
+        "codeception/codeception": "^3.1",
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "classmap": [
