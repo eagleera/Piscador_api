@@ -25,8 +25,6 @@ $app->withFacades();
 
 $app->withEloquent();
 
-$app->configure('cors');
-
 $app->configure('database');
 
 /*
@@ -65,12 +63,11 @@ $app->singleton(
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 $app->middleware([
-    \Barryvdh\Cors\HandleCors::class
+    'Vluzrmos\LumenCors\CorsMiddleware'
 ]);
 
 $app->routeMiddleware([
-    'auth' => App\Http\Middleware\Authenticate::class,
-    'cors' => \Barryvdh\Cors\HandleCors::class
+    'auth' => App\Http\Middleware\Authenticate::class
 ]);
 
 /*
@@ -87,7 +84,6 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-$app->register(Barryvdh\Cors\ServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*

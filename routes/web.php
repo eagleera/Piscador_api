@@ -43,6 +43,6 @@ Route::post('/ranch/add-invite', ['as'=> 'accept invite', 'uses'=>'RanchControll
 Route::post('/ranch/create-invite', ['as'=> 'generate invite', 'uses'=>'RanchController@createInvite']);
 //USER
 Route::post('/register', ['as'=> 'register user', 'uses'=>'AuthController@register']);
-Route::post('/login', ['as'=> 'login user', 'uses'=>'AuthController@login'])->middleware('cors');
+Route::post('/login', ['as'=> 'login user', 'uses'=>'AuthController@login']);
 Route::get('/me', ['as'=> 'get current user', 'uses'=>'AuthController@me']);
 Route::post('/logout', ['as'=> 'log out', 'uses'=>'AuthController@logout']);
