@@ -15,16 +15,13 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
         ]);
-
         try {
             $user = new User;
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $plainPassword = $request->input('password');
             $user->password = app('hash')->make($plainPassword);
-
             $user->save();
-
             //return successful response
             return response()->json(['user' => $user, 'msg' => 'CREATED'], 201);
 
